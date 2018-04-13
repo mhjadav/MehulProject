@@ -1,0 +1,36 @@
+{
+  "name": "app",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "bootstrap": "4.0.0-beta.3",
+    "bootstrap-select": "^1.12.4",
+    "firebase": "^4.9.0",
+    "lodash": "^4.17.4",
+    "match-sorter": "^2.2.0",
+    "namor": "^1.0.1",
+    "react": "^16.0.0",
+    "react-bootstrap": "^0.32.0",
+    "react-bootstrap-multiselect": "^2.4.1",
+    "react-bootstrap-select": "^0.14.0",
+    "react-calculator": "^0.0.2",
+    "react-data-grid": "^3.0.3",
+    "react-dom": "^16.0.0",
+    "react-redux": "^5.0.6",
+    "react-router": "3.0.5",
+    "react-router-dom": "^4.2.2",
+    "react-scripts": "1.0.17",
+    "react-select": "^1.2.1",
+    "react-select-box": "^3.0.1",
+    "react-table": "^6.7.6",
+    "reactstrap": "^5.0.0-alpha.4",
+    "redux": "^3.7.2",
+    "redux-thunk": "^2.2.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}
