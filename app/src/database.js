@@ -14,29 +14,29 @@
       database = firebase.database();
  }
 
-export const addPaymentDetail = (model) => {
+export const addPaymentDetail = (model, city) => {
     let key = database.ref('/').push().key
     model = { ...model,
         TIMESTAMP: firebase.database.ServerValue.TIMESTAMP
     };
     //model.DATE = formatDate(model.DATE, "dd/mm/yyyy");
-    return database.ref('/paymentDetails/' + model.YEAR + "/" + key).set(model)
+    return database.ref('/paymentDetails/' + model.YEAR + "/" + city + "/" + key).set(model)
 }
-export const updatePaymentDetail = (model, key) => {
+export const updatePaymentDetail = (model, city, key) => {
     model = { ...model,
         TIMESTAMP: firebase.database.ServerValue.TIMESTAMP
     };
     //model.DATE = formatDate(model.DATE, "dd/mm/yyyy");
-    return database.ref('/paymentDetails/' + model.YEAR + "/" + key).set(model)
+    return database.ref('/paymentDetails/' + model.YEAR + "/" + city + "/" + key).set(model)
 }
-export const getPaymentDetail = (Year) => {
-    return database.ref(`/paymentDetails/`+ Year).once('value')
-}
-
-export const removeEntry = (key, year) => {
-    return database.ref(`/paymentDetails/` + year + "/" + key).remove();
+export const getPaymentDetail = (Year, city) => {
+    return database.ref(`/paymentDetails/`+ Year + "/" + city ).once('value')
 }
 
-export const getPaymentEntry = (key, year) => {
-    return database.ref(`/paymentDetails/` + year + "/" + key).once('value');
+export const removeEntry = (key, year, city) => {
+    return database.ref(`/paymentDetails/` + year + "/" + city + "/" + key).remove();
+}
+
+export const getPaymentEntry = (key, year, city) => {
+    return database.ref(`/paymentDetails/` + year + "/" + city + "/"+ key).once('value');
 }

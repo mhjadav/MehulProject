@@ -1,0 +1,59 @@
+[debug] [2018-04-13T19:12:27.347Z] ----------------------------------------------------------------------
+[debug] [2018-04-13T19:12:27.351Z] Command:       /usr/local/Cellar/node/8.4.0/bin/node /usr/local/bin/firebase deploy
+[debug] [2018-04-13T19:12:27.351Z] CLI Version:   3.16.0
+[debug] [2018-04-13T19:12:27.351Z] Platform:      darwin
+[debug] [2018-04-13T19:12:27.351Z] Node Version:  v8.4.0
+[debug] [2018-04-13T19:12:27.352Z] Time:          Sat Apr 14 2018 00:42:27 GMT+0530 (IST)
+[debug] [2018-04-13T19:12:27.352Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2018-04-13T19:12:27.367Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2018-04-13T19:12:27.368Z] > authorizing via signed-in user
+[debug] [2018-04-13T19:12:27.370Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/mehulpayment  
+  
+ Sat Apr 14 2018 00:42:27 GMT+0530 (IST)
+[debug] [2018-04-13T19:12:28.787Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-13T19:12:28.788Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/mehulpayment/tokens  
+  
+ Sat Apr 14 2018 00:42:28 GMT+0530 (IST)
+[debug] [2018-04-13T19:12:29.873Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Deploying to 'mehulpayment'...
+[info] 
+[info] i  deploying database, hosting
+[info] i  database: checking rules syntax...
+[debug] [2018-04-13T19:12:31.456Z] >>> HTTP REQUEST PUT https://mehulpayment.firebaseio.com/.settings/rules.json?dryRun=true  
+ {
+  "rules": {
+    ".read": true,
+    ".write": true
+  }
+} 
+ Sat Apr 14 2018 00:42:31 GMT+0530 (IST)
+[debug] [2018-04-13T19:12:33.074Z] <<< HTTP RESPONSE 200
+[info] ✔  database: rules syntax for database mehulpayment is valid
+[info] i  hosting: preparing build directory for upload...
+[debug] [2018-04-13T19:12:33.432Z] >>> HTTP REQUEST PUT https://deploy.firebase.com/v1/hosting/mehulpayment/uploads/-LA-Q5XawPWVf8nU9_JY?fileCount=10&message=  
+  
+ Sat Apr 14 2018 00:42:33 GMT+0530 (IST)
+[debug] [2018-04-13T19:12:39.227Z] <<< HTTP RESPONSE 200
+[debug] [2018-04-13T19:12:39.227Z] [hosting] .tgz uploaded successfully, waiting for extraction
+[info] ✔  hosting: 10 files uploaded successfully
+[info] i  database: releasing rules...
+[debug] [2018-04-13T19:12:40.411Z] >>> HTTP REQUEST PUT https://mehulpayment.firebaseio.com/.settings/rules.json  
+ {
+  "rules": {
+    ".read": true,
+    ".write": true
+  }
+} 
+ Sat Apr 14 2018 00:42:40 GMT+0530 (IST)
+[debug] [2018-04-13T19:12:41.983Z] <<< HTTP RESPONSE 200
+[info] ✔  database: rules for database mehulpayment released successfully
+[debug] [2018-04-13T19:12:41.984Z] >>> HTTP REQUEST POST https://deploy.firebase.com/v1/projects/mehulpayment/releases  
+ { hosting: 
+   { public: 'build',
+     ignore: [ 'firebase.json', '**/.*', '**/node_modules/**' ],
+     version: '-LA-Q5XawPWVf8nU9_JY',
+     prefix: '-LA-Q5XawPWVf8nU9_JY/',
+     manifest: [] } } 
+ Sat Apr 14 2018 00:42:41 GMT+0530 (IST)

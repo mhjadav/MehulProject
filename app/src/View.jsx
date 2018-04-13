@@ -58,6 +58,7 @@ class View extends Component {
     super();
     this.state = {
       data: [],
+      city:"girgadhada",
       filterList:{
         "DATE": [],
 		"CH/FTO NO": [],
@@ -124,12 +125,12 @@ class View extends Component {
         filteredData
     })
   }
-  fetchData(state, instance) {
+  fetchData(state) {
     // Whenever the table model changes, or the user sorts or changes pages, this method gets called and passed the current table model.
     // You can set the `loading` prop of the table to true to use the built-in one or show you're own loading bar if you want.
     this.setState({ loading: true });
-
-    getPaymentDetail("20172018").then((res) => {
+    this.setState({ tableState: state });
+    getPaymentDetail("20172018", this.state.city).then((res) => {
         this.filterRawData(res.val());
         requestData(
         this.state.filteredData,
@@ -159,13 +160,20 @@ class View extends Component {
     this.setState({
         data
     })
-    removeEntry(key, "20172018");
+    removeEntry(key, "20172018", this.state.city);
   }
   
   _handleExportToExcel = () => {
     const xls = new XlsExport(this.state.data, "PaymentDetails");
     xls.exportToXLS('paymentDetails-'+ Date.now() +'.xls')
     
+  }
+
+  _handleSelectCity = (e) => {
+    this.setState({city : e.target.value});
+    setTimeout(() => {
+        this.fetchData(this.state.tableState);        
+    }, 0);      
   }
   render() {
     const { data, pages, loading } = this.state;
@@ -182,6 +190,10 @@ class View extends Component {
                     <strong>Total Amount:</strong>{" "}
                     <span>{_.reduce(data, (prev, curr) => prev + (isNaN(curr.AMOUNT) ? 0 : parseInt(curr.AMOUNT || 0, 10)), 0)}</span>
                     <input type="button" className="form-control primary" value="export To Excel" Style="width:200px;" onClick={this._handleExportToExcel}/>
+                    <select onChange={this._handleSelectCity}>
+                        <option value="girgadhada">Gir Gadhada</option>
+                        <option value="veraval">Veraval</option>
+                    </select>
                     </p>
                 ),
                 columns:[
@@ -191,7 +203,7 @@ class View extends Component {
                         console.log(props);
                             return <div>
                                 <Nav>
-                                    <Link Style="float: left;width: 55px;margin-right: 5px;" type="button" className="form-control primary" to={"/edit/"+props.original.key.toString()}>Edit</Link> 
+                                    <Link Style="float: left;width: 55px;margin-right: 5px;" type="button" className="form-control primary" to={"/edit/"+props.original.key.toString()+"/" + this.state.city}>Edit</Link> 
                                     <input Style="float: left;width: 70px;" type="button" className="form-control primary" value="Delete" data-key={props.original.key.toString()} onClick={ this._handleDeleteEntry } data-index={props.index}/>                                
                                 </Nav>                                
                             </div>

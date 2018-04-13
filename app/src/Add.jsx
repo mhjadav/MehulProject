@@ -18,10 +18,11 @@ class Add extends React.Component {
             WORKDETAIL:"",
             AMOUNT:"",
             NOTE:"",
-            YEAR: "20172018"
+            YEAR: "20172018",
+            City: "girgadhada"
         }
         if(props.match.params.key){
-            getPaymentEntry(props.match.params.key, "20172018").then((res) => {
+            getPaymentEntry(props.match.params.key, "20172018", props.match.params.city).then((res) => {
                 const entryVal = res.val();
                 this.setState({
                     DATE: entryVal.DATE,
@@ -34,7 +35,8 @@ class Add extends React.Component {
                     WORKDETAIL:entryVal.WORKDETAIL,
                     AMOUNT:entryVal.AMOUNT,
                     NOTE:entryVal.NOTE,
-                    YEAR: "20172018"
+                    YEAR: "20172018",
+                    City: props.match.params.city
                 });
             });
         }
@@ -80,7 +82,7 @@ class Add extends React.Component {
             YEAR,
         };
         if(this.props.match.params.key){
-            updatePaymentDetail(modelData, this.props.match.params.key).then(() => {
+            updatePaymentDetail(modelData, this.state.City, this.props.match.params.key).then(() => {
                 this.setState({
                     showSuccess:true,
                     successMessage: "Updated Successfully."
@@ -89,7 +91,7 @@ class Add extends React.Component {
                 this.setDefaultValue();            
             });
         } else {
-            addPaymentDetail(modelData).then(() => {
+            addPaymentDetail(modelData, this.state.City).then(() => {
                 this.setState({
                     showSuccess:true,
                     successMessage: "Saved Successfully."
@@ -152,6 +154,11 @@ class Add extends React.Component {
     
     _handleYearChange = () => {
 
+    }
+    _handleCityChange = (event) => {
+        this.setState({
+            City: event.target.value
+        });
     }
   render() {
     const villageList = [ "Adri",
@@ -233,11 +240,18 @@ class Add extends React.Component {
                 }
                 <div className="col col-sm-6">
                 <FormGroup row>
+                    <Label for="selch" sm={4}>City</Label>
+                    <Col sm={8}>
+                        <Input type="select" name="city" id="selcity" onChange={ this._handleCityChange } value={this.props.match.params.city}>
+                            <option value="girgadhada">Gir Gadhada</option>
+                            <option value="veraval">Veraval</option>
+                        </Input>
+                    </Col>
+                </FormGroup>
+                <FormGroup row>
                     <Label for="selch" sm={4}>Select Year</Label>
                     <Col sm={8}>
                         <Input type="select" name="ch" id="selch" onChange={ this._handleYearChange } value={this.state.YEAR}>
-                            <option value="20152016">2015-2016</option>
-                            <option value="20162017">2016-2017</option>
                             <option value="20172018">2017-2018</option>
                             <option value="20182019">2018-2019</option>
                             <option value="20192020">2019-2020</option>
