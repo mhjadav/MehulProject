@@ -18,11 +18,17 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      user: null
+      user: null,
+      auth :firebase.auth()
     };
+    this.state.auth.onAuthStateChanged((user) => {
+      this.setState({
+        user
+      });
+    });
   }
   componentDidMount(){
-    //this.signIn();    
+    this.signIn();    
   }
   componentDidUpdate(prevProps) {
     const isNotSameRoute = path(["props", "location", "pathname"], this) !== path(["location", "pathname"], prevProps);
@@ -31,23 +37,13 @@ class App extends Component {
     }
   }
   signIn = () => {
-    var provider = new firebase.auth.GoogleAuthProvider();
-    var auth = firebase.auth();
-    auth.onAuthStateChanged((user) => {
-      if(!user){
-        auth.signInWithPopup(provider);    
-      }
-        this.setState({
-          user
-        });
-    });
+    var provider = new firebase.auth.GoogleAuthProvider(); 
+    this.state.auth.signInWithPopup(provider);    
   }
   signOut = () => {
-    var auth = firebase.auth();
-    auth.signOut();
+    this.state.auth.signOut();
   }
   render() {
-    
     return (
       this.state.user ?
       <div className="App">
